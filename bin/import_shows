@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+require 'downloaded_show'
+
+import_folder = ARGV[0] || Dir.pwd
+movie_folder = ARGV[1] || "/Volumes/Ultradisk/james/Movies"
+itunes_add_folder = ARGV[2] || "/Volumes/Ultradisk/iTunes/iTunes Media/Automatically Add To iTunes"
+
+Dir[File.expand_path("#{import_folder}/*.avi")].each do |movie|
+  DownloadedShow.new(movie).import_to_itunes(movie_folder, itunes_add_folder)
+end
